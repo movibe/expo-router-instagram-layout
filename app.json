@@ -1,6 +1,5 @@
 {
   "expo": {
-    "sdkVersion": "48.0.0",
     "scheme": "acme",
     "web": {
       "bundler": "metro",
@@ -11,6 +10,9 @@
     "experiments": {
       "tsconfigPaths": true,
       "typedRoutes": true
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

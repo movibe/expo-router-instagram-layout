@@ -1,5 +1,6 @@
 import Head from "expo-router/head";
 import { ResponsiveNavigator } from "@/components/navigator";
+import "../styles/global.css";
 
 export default function Layout() {
   return (
