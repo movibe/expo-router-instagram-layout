@@ -6,6 +6,10 @@ const config = getDefaultConfig(__dirname, {
 });
 
 config.resolver.sourceExts.push("svg");
+config.resolver.sourceExts.push("cjs");
+config.resolver.sourceExts.push("mjs");
+
+config.resolver.resolverMainFields.unshift("sbmodern");
 
 config.resolver.assetExts = config.resolver.assetExts.filter(
   (ext) => !config.resolver.sourceExts.includes(ext)

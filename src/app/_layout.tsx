@@ -1,8 +1,11 @@
 import Head from "expo-router/head";
 import { ResponsiveNavigator } from "@/components/navigator";
 import "../styles/global.css";
+import { storybookEnabled } from "@/config";
+import { Slot } from "expo-router";
 
 export default function Layout() {
+  if(storybookEnabled) return <Slot/>
   return (
     <>
       <Head>

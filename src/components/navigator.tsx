@@ -48,7 +48,7 @@ function HeaderLogo() {
         {({ hovered }) => (
           <Text
             style={[
-              jsStyles.headerLogo,
+              // jsStyles.headerLogo,
               {
                 backgroundColor: hovered ? "rgba(0, 0, 0, 0.1)" : "transparent",
               },
