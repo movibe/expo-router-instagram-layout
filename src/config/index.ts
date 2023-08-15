@@ -1,1 +1,2 @@
-export const storybookEnabled = process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true";
+export const storybookEnabled =
+  process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === "true";

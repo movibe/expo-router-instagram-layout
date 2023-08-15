@@ -28,7 +28,7 @@ export function Icon({
     const imp = icons(`./${name}.svg`);
     if (!imp) {
       throw new Error(
-        `Icon not found: ${name}. Options: ${icons.keys().join(", ")}}`
+        `Icon not found: ${name}. Options: ${icons.keys().join(", ")}}`,
       );
     }
     return imp.default;

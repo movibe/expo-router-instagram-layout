@@ -19,7 +19,7 @@ type MinimalState = {
 
 const getRootStateForNavigate = (
   navigation: NavigationObject,
-  state: MinimalState
+  state: MinimalState,
 ): MinimalState => {
   const parent = navigation.getParent();
 
@@ -64,12 +64,12 @@ export function useLinkBuilder() {
 
       const out = linking.options!.getPathFromState(
         state,
-        linking.options!.config
+        linking.options!.config,
       );
 
       return out;
     },
-    [linking, navigation]
+    [linking, navigation],
   );
 
   return buildLink;

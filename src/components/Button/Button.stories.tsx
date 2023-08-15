@@ -1,33 +1,32 @@
- import React from "react";
- import { View } from "react-native";
- import { Button, ButtonProps } from "./index";
- import { Meta, StoryObj } from "@storybook/react-native";
+import { Meta, StoryObj } from "@storybook/react-native";
 
- const meta: Meta<ButtonProps> = {
-   title: "Button",
-   component: Button,
-   argTypes: {
-     onPress: {
-       action: "onPress event",
-     },
-   },
- };
+import { Button, ButtonProps } from "./index";
 
- export default meta;
+const meta: Meta<ButtonProps> = {
+  argTypes: {
+    onPress: {
+      action: "onPress event",
+    },
+  },
+  component: Button,
+  title: "Button",
+};
 
- type Story = StoryObj<ButtonProps>;
+export default meta;
 
- export const Basic: Story = {
-   storyName: "Basic",
-   args: {
-     disabled: false,
-     children: "Tap me",
-   },
- };
+type Story = StoryObj<ButtonProps>;
 
- export const Disabled: Story = {
-   args: {
-     disabled: true,
-     children: "Disabled",
-   },
- };
+export const Basic: Story = {
+  args: {
+    children: "Tap me",
+    disabled: false,
+  },
+  storyName: "Basic",
+};
+
+export const Disabled: Story = {
+  args: {
+    children: "Disabled",
+    disabled: true,
+  },
+};

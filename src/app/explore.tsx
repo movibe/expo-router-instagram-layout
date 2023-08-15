@@ -13,22 +13,22 @@ export default function Page() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: "center",
+    flex: 1,
     padding: 24,
   },
   main: {
     flex: 1,
     justifyContent: "center",
-    maxWidth: 960,
     marginHorizontal: "auto",
+    maxWidth: 960,
+  },
+  subtitle: {
+    color: "#38434D",
+    fontSize: 36,
   },
   title: {
     fontSize: 64,
     fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
   },
 });
