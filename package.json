@@ -15,7 +15,8 @@
     "format": "prettier --write $PWD/\"src/**/*.{ts,tsx}\"",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:ci": "eslint . --quiet --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx"
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx",
+    "g": "scaffdog generate"
   },
   "dependencies": {
     "@types/react": "~18.2.14",
@@ -40,6 +41,7 @@
     "typescript": "*"
   },
   "devDependencies": {
+    "scaffdog": "3.0.0",
     "@babel/core": "^7.20.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
     "@react-native-async-storage/async-storage": "1.18.2",
