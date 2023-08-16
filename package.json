@@ -4,13 +4,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "sb-rn-get-stories --config-path .ondevice && npx expo start",
+    "start": "sb-rn-get-stories --config-path .storybook/native && npx expo start",
     "android": "npx expo start --android",
     "ios": "npx expo start --ios",
     "web": "npx expo start --web",
     "build": "npx expo export -p web",
     "deploy": "vercel build && vercel deploy --prebuilt",
-    "storybook:web": "start-storybook -p 6006",
+    "storybook:web": "start-storybook --config-dir .storybook/web -p 6006",
     "build-storybook": "build-storybook",
     "format": "prettier --write $PWD/\"src/**/*.{ts,tsx}\"",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -88,5 +88,21 @@
     "eslint-config-standard-with-typescript": "37.0.0",
     "prettier": "3.0.1",
     "tailwindcss": "3.3.2"
+  },
+  "expo": {
+    "install": {
+      "exclude": [
+        "@react-native-async-storage/async-storage",
+        "@react-native-community/datetimepicker"
+      ]
+    }
+  },
+  "resolutions": {
+    "react-docgen-typescript": "2.2.2",
+    "@storybook/react-docgen-typescript-plugin": "1.0.6--canary.9.cd77847.0"
+  },
+  "overrides": {
+    "react-docgen-typescript": "2.2.2",
+    "@storybook/react-docgen-typescript-plugin": "1.0.6--canary.9.cd77847.0"
   }
 }

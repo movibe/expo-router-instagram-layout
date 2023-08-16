@@ -1,40 +1,42 @@
-export default ({ config }) => ({
+/* eslint-disable node/no-unsupported-features/es-syntax */
+export default ({config}) => ({
   ...config,
-  scheme: "acme",
-  web: {
-    bundler: "metro",
-    output: "static",
-    favicon: "./assets/favicon.png",
+  android: {
+    adaptiveIcon: {
+      backgroundColor: '#FFFFFF',
+      foregroundImage: './assets/adaptive-icon.png',
+    },
   },
-  name: "instagram-layout",
-  slug: "instagram-layout",
+  assetBundlePatterns: ['**/*'],
   experiments: {
     tsconfigPaths: true,
     typedRoutes: true,
   },
-  plugins: ["expo-router"],
-  version: "1.0.0",
-  orientation: "portrait",
-  icon: "./assets/icon.png",
   extra: {
     storybookEnabled: process.env.STORYBOOK_ENABLED,
   },
+  icon: './assets/icon.png',
+  ios: {
+    supportsTablet: true,
+  },
+
+  name: 'instagram-layout',
+  orientation: 'portrait',
+  plugins: ['expo-router'],
+  scheme: 'acme',
+  slug: 'instagram-layout',
   splash: {
-    image: "./assets/splash.png",
-    resizeMode: "contain",
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
+    image: './assets/splash.png',
+    resizeMode: 'contain',
   },
   updates: {
     fallbackToCacheTimeout: 0,
   },
-  assetBundlePatterns: ["**/*"],
-  ios: {
-    supportsTablet: true,
+  version: '1.0.0',
+  web: {
+    bundler: 'metro',
+    favicon: './assets/favicon.png',
+    output: 'static',
   },
-  android: {
-    adaptiveIcon: {
-      foregroundImage: "./assets/adaptive-icon.png",
-      backgroundColor: "#FFFFFF",
-    },
-  }
-});
+})
