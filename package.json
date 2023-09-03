@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "storybook:native": "sb-rn-get-stories --config-path .storybook/native && EXPO_PUBLIC_STORYBOOK_ENABLED=true npx expo start",
     "start": "sb-rn-get-stories --config-path .storybook/native && npx expo start",
     "android": "npx expo start --android",
     "ios": "npx expo start --ios",
