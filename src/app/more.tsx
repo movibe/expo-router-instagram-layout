@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import {StyleSheet, Text, View} from 'react-native'
 
 export default function Page() {
   return (
@@ -8,27 +8,27 @@ export default function Page() {
         <Text style={styles.subtitle}>Modify app/more.tsx</Text>
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
+    alignItems: 'center',
     flex: 1,
     padding: 24,
   },
   main: {
     flex: 1,
-    justifyContent: "center",
-    marginHorizontal: "auto",
+    justifyContent: 'center',
+    marginHorizontal: 'auto',
     maxWidth: 960,
   },
   subtitle: {
-    color: "#38434D",
+    color: '#38434D',
     fontSize: 36,
   },
   title: {
     fontSize: 64,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
-});
+})

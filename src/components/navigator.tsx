@@ -1,95 +1,88 @@
-import { Icon } from "@/components/icon";
-import { makeIcon, TabBarIcon } from "@/components/tab-bar-icon";
-import { TabbedNavigator } from "@/components/tab-slot";
-import cssStyles from "@/styles/root-layout.module.scss";
-import { Pressable, StyleSheet } from "@bacons/react-views";
-import { Link } from "expo-router";
-import React from "react";
-import {
-  Platform,
-  Text,
-  useWindowDimensions,
-  View,
-  ViewStyle,
-} from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {Pressable, StyleSheet} from '@bacons/react-views'
+import {Link} from 'expo-router'
+import React from 'react'
+import {Platform, Text, useWindowDimensions, View, ViewStyle} from 'react-native'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-const cns = (
-  ...classes: (string | false | undefined | null)[]
-): Record<string, any> => ({
+import {Icon} from '@/components/icon'
+import {makeIcon, TabBarIcon} from '@/components/tab-bar-icon'
+import {TabbedNavigator} from '@/components/tab-slot'
+import cssStyles from '@/styles/root-layout.module.scss'
+
+const cns = (...classes: (string | false | undefined | null)[]): Record<string, any> => ({
   $$css: true,
-  _: classes.filter(Boolean).join(" ") as unknown as string[],
-});
+  _: classes.filter(Boolean).join(' ') as unknown as string[],
+})
 
 function HeaderLogo() {
-  const isLargeHorizontal = useWidth(1264);
-  const isSmallHorizontal = useWidth(768);
+  const isLargeHorizontal = useWidth(1264)
+  const isSmallHorizontal = useWidth(768)
 
   return (
     <Link
+      asChild
+      href='/'
       style={[
-        { paddingVertical: 20, alignItems: "flex-start" },
+        {alignItems: 'flex-start', paddingVertical: 20},
         Platform.select({
           default: isSmallHorizontal &&
             !isLargeHorizontal && {
-              paddingTop: 0,
-              minHeight: 96,
-              marginTop: 12,
-              paddingBottom: 23,
               height: 96,
+              marginTop: 12,
+              minHeight: 96,
+              paddingBottom: 23,
+              paddingTop: 0,
             },
           web: cns(cssStyles.headerLink),
         }),
       ]}
-      href="/"
-      asChild
     >
-      <Pressable>
-        {({ hovered }) => (
+      <Pressable accessibilityRole='button'>
+        {({hovered}) => (
           <Text
             style={[
               // jsStyles.headerLogo,
               {
-                backgroundColor: hovered ? "rgba(0, 0, 0, 0.1)" : "transparent",
+                backgroundColor: hovered ? 'rgba(0, 0, 0, 0.1)' : 'transparent',
               },
             ]}
           >
             <Icon
+              fill={Colors.dark}
+              name='logo'
               style={Platform.select({
-                default: !isLargeHorizontal && { display: "none" },
+                default: !isLargeHorizontal && {display: 'none'},
                 web: cns(cssStyles.wideVisible),
               })}
-              name="logo"
-              fill={Colors.dark}
             />
             <Icon
+              fill={Colors.dark}
+              name='logo-small'
               style={Platform.select({
-                default: isLargeHorizontal && { display: "none" },
+                default: isLargeHorizontal && {display: 'none'},
                 web: cns(cssStyles.wideHidden),
               })}
-              name="logo-small"
-              fill={Colors.dark}
             />
           </Text>
         )}
       </Pressable>
     </Link>
-  );
+  )
 }
 
 function useWidth(size) {
-  if (typeof window === "undefined") {
-    return true;
+  if (typeof window === 'undefined') {
+    return true
   }
-  const { width } = useWindowDimensions();
-  if (Platform.OS === "ios" || Platform.OS === "android") {
-    return false;
+  const {width} = useWindowDimensions()
+  if (Platform.OS === 'ios' || Platform.OS === 'android') {
+    return false
   }
-  return width >= size;
+  return width >= size
 }
 
-function SideBar({ visible }) {
-  const isLarge = useWidth(1265);
+function SideBar({visible}) {
+  const isLarge = useWidth(1265)
 
   return (
     <View
@@ -99,7 +92,7 @@ function SideBar({ visible }) {
         ...Platform.select({
           default: [
             !visible && {
-              display: "none",
+              display: 'none',
             },
             isLarge && {
               minWidth: NAV_MEDIUM_WIDTH,
@@ -117,9 +110,9 @@ function SideBar({ visible }) {
             default: [
               isLarge &&
                 ({
-                  width: NAV_MEDIUM_WIDTH,
+                  alignItems: 'flex-start',
                   minWidth: NAV_MEDIUM_WIDTH,
-                  alignItems: "flex-start",
+                  width: NAV_MEDIUM_WIDTH,
                 } as const),
             ],
             web: [cns(cssStyles.sideBarInner)],
@@ -127,40 +120,40 @@ function SideBar({ visible }) {
         ]}
       >
         <View
-          zIndex={3}
           style={[
             jsStyles.sidebarInner2,
             Platform.select({
               default: !isLarge && {
-                alignItems: "center",
+                alignItems: 'center',
               },
               web: cns(cssStyles.sideBarHeader),
             }),
           ]}
+          zIndex={3}
         >
           <HeaderLogo />
 
-          <View style={{ gap: 4, flex: 1 }}>
-            <SideBarTabItem name="index" icon={makeIcon("home")}>
+          <View style={{flex: 1, gap: 4}}>
+            <SideBarTabItem icon={makeIcon('home')} name='index'>
               Home
             </SideBarTabItem>
-            <SideBarTabItem name="explore" icon={makeIcon("explore")}>
+            <SideBarTabItem icon={makeIcon('explore')} name='explore'>
               Explore
             </SideBarTabItem>
             {/* Divider */}
           </View>
           <View>
-            <SideBarTabItem name="/more" icon={makeIcon("more")}>
+            <SideBarTabItem icon={makeIcon('more')} name='/more'>
               More
             </SideBarTabItem>
           </View>
         </View>
       </View>
     </View>
-  );
+  )
 }
 
-function TabBar({ visible }) {
+function TabBar({visible}) {
   return (
     <View
       style={[
@@ -169,7 +162,7 @@ function TabBar({ visible }) {
         },
         Platform.select({
           default: {
-            display: visible ? "flex" : "none",
+            display: visible ? 'flex' : 'none',
           },
           web: cns(cssStyles.smallVisible),
         }),
@@ -177,75 +170,65 @@ function TabBar({ visible }) {
     >
       <View style={jsStyles.nav}>
         {[
-          { name: "index", id: "index", icon: "home" },
-          { name: "explore", id: "explore", icon: "explore" },
-          { name: "/more", id: "more", icon: "more" },
+          {icon: 'home', id: 'index', name: 'index'},
+          {icon: 'explore', id: 'explore', name: 'explore'},
+          {icon: 'more', id: 'more', name: '/more'},
         ].map((tab, i) => (
-          <TabBarItem key={i} name={tab.name} id={tab.id}>
-            {({ focused, pressed, hovered }) => (
+          <TabBarItem key={i} id={tab.id} name={tab.name}>
+            {({focused, hovered, pressed}) => (
               <TabBarIcon
-                color="black"
+                color='black'
+                focused={focused}
+                name={tab.icon}
                 style={[
                   {
                     paddingHorizontal: 8,
                   },
                   Platform.select({
                     web: {
-                      transitionDuration: "100ms",
-                      transform: hovered ? [{ scale: 1.1 }] : [{ scale: 1 }],
+                      transform: hovered ? [{scale: 1.1}] : [{scale: 1}],
+                      transitionDuration: '100ms',
                     },
                   }),
                   pressed && {
-                    transform: [{ scale: 0.9 }],
                     opacity: 0.8,
+                    transform: [{scale: 0.9}],
                   },
                 ]}
-                name={tab.icon}
-                focused={focused}
               />
             )}
           </TabBarItem>
         ))}
       </View>
     </View>
-  );
+  )
 }
 
 function useIsTabSelected(name: string): boolean {
-  const { navigation } = TabbedNavigator.useContext();
+  const {navigation} = TabbedNavigator.useContext()
 
-  const state = navigation.getState();
-  const current = state.routes.find((route, i) => state.index === i);
+  const state = navigation.getState()
+  const current = state.routes.find((route, i) => state.index === i)
 
-  return current?.name === name;
+  return current?.name === name
 }
 
-function TabBarItem({
-  children,
-  name,
-  style,
-  id,
-}: {
-  children?: any;
-  name: string;
-  style?: ViewStyle;
-  id: string;
-}) {
-  const focused = useIsTabSelected(id);
+function TabBarItem({children, id, name, style}: {children?: any; name: string; style?: ViewStyle; id: string}) {
+  const focused = useIsTabSelected(id)
 
-  if (name.startsWith("/") || name.startsWith(".")) {
+  if (name.startsWith('/') || name.startsWith('.')) {
     return (
-      <Link href={name} asChild style={style}>
-        <Pressable>{(props) => children({ ...props, focused })}</Pressable>
+      <Link asChild href={name} style={style}>
+        <Pressable accessibilityRole='button'>{props => children({...props, focused})}</Pressable>
       </Link>
-    );
+    )
   }
 
   return (
-    <TabbedNavigator.Link name={id} asChild style={style}>
-      <Pressable>{(props) => children({ ...props, focused })}</Pressable>
+    <TabbedNavigator.Link asChild name={id} style={style}>
+      <Pressable accessibilityRole='button'>{props => children({...props, focused})}</Pressable>
     </TabbedNavigator.Link>
-  );
+  )
 }
 
 function SideBarTabItem({
@@ -253,73 +236,73 @@ function SideBarTabItem({
   icon,
   name,
 }: {
-  children: string;
-  icon: (props: { focused?: boolean; color: string }) => JSX.Element;
-  name: string;
+  children: string
+  icon: (props: {focused?: boolean; color: string}) => JSX.Element
+  name: string
 }) {
-  const isLarge = useWidth(1265);
+  const isLarge = useWidth(1265)
 
   return (
     <TabBarItem
-      name={name}
+      accessibilityHasPopup='menu'
       id={name}
-      accessibilityHasPopup="menu"
+      name={name}
       style={{
         paddingVertical: 4,
-        width: "100%",
+        width: '100%',
       }}
     >
-      {({ focused, hovered }) => (
+      {({focused, hovered}) => (
         <View
           style={[
             {
-              padding: 12,
-              flexDirection: "row",
-              alignItems: "center",
+              alignItems: 'center',
               borderRadius: 999,
-              transitionProperty: ["background-color", "box-shadow"],
-              transitionDuration: "200ms",
+              flexDirection: 'row',
+              padding: 12,
+              transitionDuration: '200ms',
+              transitionProperty: ['background-color', 'box-shadow'],
             },
             hovered && {
-              backgroundColor: "rgba(0, 0, 0, 0.1)",
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
             },
           ]}
         >
           <View
             style={[
               {
-                transitionTimingFunction: "cubic-bezier(0.17, 0.17, 0, 1)",
-                transitionProperty: ["transform"],
-                transitionDuration: "150ms",
+                transitionDuration: '150ms',
+                transitionProperty: ['transform'],
+                transitionTimingFunction: 'cubic-bezier(0.17, 0.17, 0, 1)',
               },
               hovered && {
-                transform: [{ scale: 1.1 }],
+                transform: [{scale: 1.1}],
               },
             ]}
           >
             {icon({
+              color: '#000',
               focused,
-              color: "#000",
             })}
           </View>
 
           <Text
             style={[
               {
-                color: "#000",
+                color: '#000',
                 fontSize: 16,
+                lineHeight: 24,
                 marginLeft: 16,
                 marginRight: 16,
-                lineHeight: 24,
               },
               Platform.select({
                 default: {
-                  display: isLarge ? "flex" : "none",
+                  display: isLarge ? 'flex' : 'none',
                 },
                 web: cns(cssStyles.sideBarTabItemText),
               }),
               focused && {
-                fontWeight: "bold",
+                fontWeight: 'bold',
               },
             ]}
           >
@@ -328,18 +311,18 @@ function SideBarTabItem({
         </View>
       )}
     </TabBarItem>
-  );
+  )
 }
 
 export function ResponsiveNavigator() {
-  const isRowLayout = useWidth(768);
+  const isRowLayout = useWidth(768)
 
   return (
     <TabbedNavigator
       screenOptions={{
-        tabBarShowLabel: false,
         headerShown: false,
-        tabBarActiveTintColor: "black",
+        tabBarActiveTintColor: 'black',
+        tabBarShowLabel: false,
       }}
     >
       <View
@@ -347,7 +330,7 @@ export function ResponsiveNavigator() {
           jsStyles.flex1,
           Platform.select({
             default: {
-              flexDirection: isRowLayout ? "row" : "column",
+              flexDirection: isRowLayout ? 'row' : 'column',
             },
             web: cns(cssStyles.container),
           }),
@@ -359,97 +342,99 @@ export function ResponsiveNavigator() {
         <TabBar visible={!isRowLayout} />
       </View>
     </TabbedNavigator>
-  );
+  )
 }
 
-function AppHeader({ visible }) {
-  const { top } = useSafeAreaInsets();
-  const height = 60 + top;
+function AppHeader({visible}) {
+  const {top} = useSafeAreaInsets()
+  const height = 60 + top
   return (
     <>
-      <View style={{ height }} />
+      <View style={{height}} />
       <View
         style={[
           Platform.select({
             default: !visible && {
-              display: "none",
+              display: 'none',
             },
             web: cns(cssStyles.smallVisible),
           }),
-          { height, paddingTop: top },
+          {height, paddingTop: top},
           jsStyles.appHeader,
         ]}
       >
-        <Icon name="logo" fill={Colors.dark} />
+        <Icon fill={Colors.dark} name='logo' />
       </View>
     </>
-  );
+  )
 }
 
 const Colors = {
-  lightGray: "rgba(230, 230, 230, 1)",
-  dark: "rgba(41, 41, 41, 1)",
-};
+  dark: 'rgba(41, 41, 41, 1)',
+  lightGray: 'rgba(230, 230, 230, 1)',
+}
 
-const NAV_MEDIUM_WIDTH = 244;
+const NAV_MEDIUM_WIDTH = 244
 
 const jsStyles = StyleSheet.create({
+  appHeader: {
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderBottomColor: Colors.lightGray,
+    borderBottomWidth: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    left: 0,
+    paddingHorizontal: 16,
+    position: Platform.select({default: 'absolute', web: 'fixed'}),
+    right: 0,
+    top: 0,
+    zIndex: 10,
+  },
+  flex1: {flex: 1},
+  headerLogo: {
+    // flex: 1,
+    alignItems: 'center',
+
+    borderRadius: 4,
+
+    display: 'flex',
+    margin: 0,
+    marginVertical: 4,
+    padding: 12,
+    transitionDuration: '200ms',
+    transitionProperty: ['background-color', 'box-shadow'],
+  },
+  nav: {
+    alignItems: 'center',
+    borderTopColor: Colors.lightGray,
+    borderTopWidth: 1,
+    flexDirection: 'row',
+    height: 49,
+    justifyContent: 'space-around',
+    paddingHorizontal: 16,
+  },
   sideBar: {
     minWidth: 72,
     width: 72,
   },
   sidebarInner: {
-    position: Platform.select({ web: "fixed", default: "absolute" }),
-    height: "100%",
-    maxHeight: "100%",
-    alignItems: "stretch",
-    borderRightWidth: 1,
+    alignItems: 'stretch',
     borderRightColor: Colors.lightGray,
+    borderRightWidth: 1,
+    height: '100%',
+    maxHeight: '100%',
     minWidth: 72,
-    width: 72,
-    paddingTop: 8,
-    paddingHorizontal: 12,
     paddingBottom: 20,
-  },
-  flex1: { flex: 1 },
-  appHeader: {
-    zIndex: 10,
-    backgroundColor: "white",
-    position: Platform.select({ web: "fixed", default: "absolute" }),
-    top: 0,
-    left: 0,
-    right: 0,
-    paddingHorizontal: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.lightGray,
+    paddingHorizontal: 12,
+    paddingTop: 8,
+    position: Platform.select({default: 'absolute', web: 'fixed'}),
+    width: 72,
   },
   sidebarInner2: {
+    alignItems: 'stretch',
     flex: 1,
-    alignItems: "stretch",
-    height: "100%",
-    justifyContent: "space-between",
+    height: '100%',
+    justifyContent: 'space-between',
   },
-  headerLogo: {
-    margin: 0,
-    display: "flex",
-    // flex: 1,
-    alignItems: "center",
-    padding: 12,
-    marginVertical: 4,
-    borderRadius: 4,
-    transitionProperty: ["background-color", "box-shadow"],
-    transitionDuration: "200ms",
-  },
-  nav: {
-    flexDirection: "row",
-    borderTopWidth: 1,
-    borderTopColor: Colors.lightGray,
-    justifyContent: "space-around",
-    alignItems: "center",
-    height: 49,
-    paddingHorizontal: 16,
-  },
-});
+})

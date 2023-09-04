@@ -7,6 +7,7 @@ export default ({config}) => ({
       foregroundImage: './assets/adaptive-icon.png',
     },
   },
+
   assetBundlePatterns: ['**/*'],
   experiments: {
     tsconfigPaths: true,
@@ -19,8 +20,8 @@ export default ({config}) => ({
   ios: {
     supportsTablet: true,
   },
-
   name: 'instagram-layout',
+
   orientation: 'portrait',
   plugins: ['expo-router'],
   scheme: 'acme',
@@ -33,6 +34,7 @@ export default ({config}) => ({
   updates: {
     fallbackToCacheTimeout: 0,
   },
+  userInterfaceStyle: 'automatic',
   version: '1.0.0',
   web: {
     bundler: 'metro',

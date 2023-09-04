@@ -6,8 +6,8 @@ module.exports = {
     'eslint-config-prettier', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    // 'plugin:jest/recommended',
-    // 'plugin:jest/style',
+    // "plugin:jest/recommended",
+    // "plugin:jest/style",
     'plugin:testing-library/react',
     'plugin:import/recommended',
     'plugin:import/typescript',
@@ -23,11 +23,7 @@ module.exports = {
 
   overrides: [
     {
-      files: [
-        '**/*.test.ts*',
-        'src/test/**/*',
-        // , 'jest.setup.ts'
-      ],
+      files: ['**/*.test.ts*', 'src/test/**/*', 'jest.setup.ts'],
       rules: {
         'node/no-missing-require': 'off',
         'node/no-unpublished-import': 'off',
@@ -55,7 +51,7 @@ module.exports = {
 
   plugins: [
     '@typescript-eslint',
-    // 'jest',
+    // "jest",
     'testing-library',
     'node',
     'import',
@@ -72,11 +68,10 @@ module.exports = {
   rules: {
     '@typescript-eslint/member-ordering': ['error', {default: {order: 'alphabetically'}}],
     '@typescript-eslint/no-unused-vars': 'off',
-    // 'import/no-default-export': ['error'],
     'no-console': [2, {allow: ['warn', 'error']}],
     'node/no-missing-import': 'off',
     'node/no-unpublished-import': ['warn'],
-    'node/no-unsupported-features/es-syntax': ['error', {ignores: ['modules']}],
+    'node/no-unsupported-features/es-syntax': 0,
     'object-curly-spacing': ['error', 'never'],
     'object-shorthand': ['error', 'always'],
     'prettier/prettier': [
