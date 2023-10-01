@@ -1,5 +1,4 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
-export default ({config}) => ({
+export default ({ config }) => ({
   ...config,
   android: {
     adaptiveIcon: {
@@ -41,4 +40,4 @@ export default ({config}) => ({
     favicon: './assets/favicon.png',
     output: 'static',
   },
-})
+});

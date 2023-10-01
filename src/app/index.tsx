@@ -1,46 +1,43 @@
-/* eslint-disable node/no-missing-require */
-/* eslint-disable @typescript-eslint/no-var-requires */
-// app/Index.tsx
-import React from 'react'
-import {Text, View} from 'react-native'
-import {useDeviceContext} from 'twrnc'
+import React from 'react';
+import { Text, View } from 'react-native';
+import { useDeviceContext } from 'twrnc';
 
-import {Button} from '@/components/Button'
-import {storybookEnabled} from '@/config'
-import {tw} from '@/lib/tailwind'
+import { Button } from '@/components/Button';
+import { storybookEnabled } from '@/config';
+import { tailwind, tw } from '@/lib/tailwind';
 
 const Index = () => {
-  useDeviceContext(tw)
+  useDeviceContext(tw);
   return (
-    <View style={tw.style('flex-1 items-center justify-center bg-white dark:bg-slate-800')}>
-      <View style={tw.style('flex-1 justify-center ')}>
-        <Text style={tw.style('font-bold text-2xl dark:text-white')}>Home</Text>
-        <Text style={tw.style('text-lg dark:text-white')}>Modify app/index.tsx</Text>
+    <View style={tailwind('flex-1 items-center justify-center bg-white dark:bg-slate-800')}>
+      <View style={tailwind('flex-1 justify-center ')}>
+        <Text style={tailwind('font-bold text-29xl dark:text-white')}>Home</Text>
+        <Text style={tailwind('text-lg dark:text-white')}>Modify app/index.tsx</Text>
+
         <Button onPress={console.log}>Teste de botão</Button>
-        <Button color='secondary' onPress={console.log}>
+        <Button color="secondary" onPress={console.log}>
           Teste de botão
         </Button>
-        <Button color='secondary' onPress={console.log} size='sm'>
+        <Button color="secondary" onPress={console.log} size="sm">
           Teste de botão
         </Button>
       </View>
     </View>
-  )
-}
+  );
+};
 
-let EntryPoint = Index
+let EntryPoint = Index;
 
 if (storybookEnabled) {
-  const StorybookUI = require('../../.storybook/native').default
-  // eslint-disable-next-line react/display-name
+  const StorybookUI = require('../../.storybook/native').default;
   EntryPoint = () => {
-    useDeviceContext(tw)
+    useDeviceContext(tw);
     return (
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <StorybookUI />
       </View>
-    )
-  }
+    );
+  };
 }
 
-export default EntryPoint
+export default EntryPoint;
