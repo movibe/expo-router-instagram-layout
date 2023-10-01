@@ -7,7 +7,7 @@ export default function Page() {
     <View style={styles.container}>
       <View
         style={tailwind(
-          'flex-row  justify-center items-center flex w-full h-fit pt-[18px] pr-4 pb-[18px] pl-4 gap-x-2.5 rounded-tl-[100px] rounded-tr-[100px] rounded-bl-[100px] rounded-br-[100px] rotate-0 opacity-100 bg-[#1bac4b] relative',
+          'flex-row  justify-center items-center flex w-full pt-[18px] pr-4 pb-[18px] pl-4 gap-x-2.5 rounded-tl-[100px] rounded-tr-[100px] rounded-bl-[100px] rounded-br-[100px] rotate-0 opacity-100 bg-[#1bac4b] relative',
         )}
       >
         <Text
