@@ -1,17 +1,17 @@
 ---
-name: "component"
-root: "./src/components"
-output: "*"
+name: 'component'
+root: './src/components'
+output: '*'
 ignore: []
 questions:
-  name: "Please enter name"
+  name: 'Please enter name'
 ---
 
 # `{{ inputs.name | pascal }}/index.tsx`
 
 ```jsx
 import { memo } from "react";
-import { Box, Text } from '@/components'
+import { View, Text } from 'react-native'
 
 export type {{ inputs.name | pascal }}Props = {
   testID?: string
@@ -22,9 +22,9 @@ export type {{ inputs.name | pascal }}Props = {
   ...props
 }: {{ inputs.name | pascal }}Props) => {
 
-  return (<Box testID={testID} {...props}>
+  return (<View testID={testID} {...props}>
     <Text testID={testID}>This is a Div</Text>
-  </Box>)
+  </View>)
 }
 
 export const {{ inputs.name | pascal }} = memo(Component)
@@ -53,7 +53,7 @@ export const Default = Template.bind({});
 
 ```jsx
 import {render, mockTestID, wrapper} from '~/tests'
-import { {{ inputs.name | pascal }}Props, {{ inputs.name | pascal }}} from '@/components'
+import { {{ inputs.name | pascal }}Props, {{ inputs.name | pascal }}} from 'components'
 
 describe(`{{ inputs.name | pascal }}`, () => {
 

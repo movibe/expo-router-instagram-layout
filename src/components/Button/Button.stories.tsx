@@ -1,6 +1,6 @@
-import {Meta, StoryObj} from '@storybook/react-native'
+import { Meta, StoryObj } from '@storybook/react-native';
 
-import {Button, ButtonProps} from './index'
+import { Button, ButtonProps } from './index';
 
 const meta: Meta<ButtonProps> = {
   argTypes: {
@@ -10,11 +10,11 @@ const meta: Meta<ButtonProps> = {
   },
   component: Button,
   title: 'Button',
-}
+};
 
-export default meta
+export default meta;
 
-type Story = StoryObj<ButtonProps>
+type Story = StoryObj<ButtonProps>;
 
 export const Basic: Story = {
   args: {
@@ -22,11 +22,11 @@ export const Basic: Story = {
     disabled: false,
   },
   storyName: 'Basic',
-}
+};
 
 export const Disabled: Story = {
   args: {
     children: 'Disabled',
     disabled: true,
   },
-}
+};

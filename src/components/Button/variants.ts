@@ -1,4 +1,4 @@
-import {tv} from 'tailwind-variants'
+import { tv } from 'tailwind-variants';
 
 export const buttonVariant = tv({
   base: 'justify-center  items-center rounded-md  mt-3',
@@ -16,4 +16,4 @@ export const buttonVariant = tv({
       sm: 'h-8 px-3',
     },
   },
-})
+});
