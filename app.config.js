@@ -3,41 +3,51 @@ export default ({ config }) => ({
   android: {
     adaptiveIcon: {
       backgroundColor: '#FFFFFF',
-      foregroundImage: './assets/adaptive-icon.png',
-    },
+      foregroundImage: './assets/adaptive-icon.png'
+    }
   },
 
   assetBundlePatterns: ['**/*'],
   experiments: {
     tsconfigPaths: true,
-    typedRoutes: true,
+    typedRoutes: true
   },
   extra: {
-    storybookEnabled: process.env.STORYBOOK_ENABLED,
+    storybookEnabled: process.env.STORYBOOK_ENABLED
   },
   icon: './assets/icon.png',
   ios: {
-    supportsTablet: true,
+    supportsTablet: true
   },
   name: 'instagram-layout',
 
   orientation: 'portrait',
-  plugins: ['expo-router'],
+  plugins: [
+    'expo-router',
+    [
+      'expo-build-properties',
+      {
+        ios: {
+          useFrameworks: 'static'
+        }
+      }
+    ]
+  ],
   scheme: 'acme',
   slug: 'instagram-layout',
   splash: {
     backgroundColor: '#ffffff',
     image: './assets/splash.png',
-    resizeMode: 'contain',
+    resizeMode: 'contain'
   },
   updates: {
-    fallbackToCacheTimeout: 0,
+    fallbackToCacheTimeout: 0
   },
   userInterfaceStyle: 'automatic',
   version: '1.0.0',
   web: {
     bundler: 'metro',
     favicon: './assets/favicon.png',
-    output: 'static',
-  },
-});
+    output: 'static'
+  }
+})
