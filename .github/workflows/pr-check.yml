@@ -7,7 +7,7 @@ jobs:
   test:
     name: Lint & Test
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message , '[skip ci]')"
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
@@ -15,16 +15,10 @@ jobs:
           fetch-depth: 0
 
       - name: Setup
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: yarn
-          registry-url: https://npm.pkg.github.com
+        uses: oven-sh/setup-bun@v1
 
       - name: Install Dependencies
-        run: yarn install --frozen-lockfile --non-interactive
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GIT_PACKAGES_TOKEN }}
+        run: bun i
 
       - name: Run linters
         uses: wearerequired/lint-action@v1
@@ -36,4 +30,4 @@ jobs:
 
       - name: Test
         run: |
-          yarn test:ci
+          bun run test:ci
