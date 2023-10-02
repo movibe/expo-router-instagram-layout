@@ -24,6 +24,7 @@ export default ({ config }) => ({
   orientation: 'portrait',
   plugins: [
     'expo-router',
+    'expo-localization',
     [
       'expo-build-properties',
       {
