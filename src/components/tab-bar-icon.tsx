@@ -1,22 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import { Icon, IconName } from './icon';
+import { Icon, IconName } from './icon'
 
 export const makeIcon =
   (name: IconName) => (props: { focused?: boolean; style?: any; color: string }) => (
     <TabBarIcon name={name} {...props} />
-  );
+  )
 
 type TabBarIconType = {
-  color: string;
-  focused?: boolean;
-  name: IconName;
-  style?: any;
-};
+  color: string
+  focused?: boolean
+  name: IconName
+  style?: any
+}
 export function TabBarIcon({ focused, ...props }: TabBarIconType) {
-  let resolvedName: any = props.name;
+  let resolvedName: any = props.name
   if (focused) {
-    resolvedName = props.name + '-active';
+    resolvedName = props.name + '-active'
   }
 
   return (
@@ -26,5 +26,5 @@ export function TabBarIcon({ focused, ...props }: TabBarIconType) {
       fill={props.color}
       name={resolvedName}
     />
-  );
+  )
 }

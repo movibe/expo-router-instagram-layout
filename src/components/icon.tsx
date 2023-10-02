@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-const icons = require.context('../../assets/icons');
+const icons = require.context('../../assets/icons')
 
 export type IconName =
   | 'logo'
@@ -12,24 +12,24 @@ export type IconName =
   | 'home'
   | 'messages-active'
   | 'messages'
-  | 'notifications';
+  | 'notifications'
 
 export function Icon({
   name,
   ...props
 }: {
-  name: IconName;
-  fill: string;
-  style?: any;
-  width?: number;
-  height?: number;
+  name: IconName
+  fill: string
+  style?: any
+  width?: number
+  height?: number
 }) {
   const Comp = React.useMemo(() => {
-    const imp = icons(`./${name}.svg`);
+    const imp = icons(`./${name}.svg`)
     if (!imp) {
-      throw new Error(`Icon not found: ${name}. Options: ${icons.keys().join(', ')}}`);
+      throw new Error(`Icon not found: ${name}. Options: ${icons.keys().join(', ')}}`)
     }
-    return imp.default;
-  }, [name]);
-  return <Comp {...props} color={props.fill} />;
+    return imp.default
+  }, [name])
+  return <Comp {...props} color={props.fill} />
 }

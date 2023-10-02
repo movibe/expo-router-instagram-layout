@@ -1,22 +1,22 @@
-import { Pressable, StyleSheet } from '@bacons/react-views';
-import { Link } from 'expo-router';
-import React from 'react';
-import { Platform, Text, useWindowDimensions, View, ViewStyle } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Pressable, StyleSheet } from '@bacons/react-views'
+import { Link } from 'expo-router'
+import React from 'react'
+import { Platform, Text, useWindowDimensions, View, ViewStyle } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { Icon } from '@/components/icon';
-import { makeIcon, TabBarIcon } from '@/components/tab-bar-icon';
-import { TabbedNavigator } from '@/components/tab-slot';
-import cssStyles from '@/styles/root-layout.module.scss';
+import { Icon } from '@/components/icon'
+import { makeIcon, TabBarIcon } from '@/components/tab-bar-icon'
+import { TabbedNavigator } from '@/components/tab-slot'
+import cssStyles from '@/styles/root-layout.module.scss'
 
 const cns = (...classes: (string | false | undefined | null)[]): Record<string, any> => ({
   $$css: true,
-  _: classes.filter(Boolean).join(' ') as unknown as string[],
-});
+  _: classes.filter(Boolean).join(' ') as unknown as string[]
+})
 
 function HeaderLogo() {
-  const isLargeHorizontal = useWidth(1264);
-  const isSmallHorizontal = useWidth(768);
+  const isLargeHorizontal = useWidth(1264)
+  const isSmallHorizontal = useWidth(768)
 
   return (
     <Link
@@ -31,28 +31,26 @@ function HeaderLogo() {
               marginTop: 12,
               minHeight: 96,
               paddingBottom: 23,
-              paddingTop: 0,
+              paddingTop: 0
             },
-          web: cns(cssStyles.headerLink),
-        }),
-      ]}
-    >
+          web: cns(cssStyles.headerLink)
+        })
+      ]}>
       <Pressable accessibilityRole="button">
         {({ hovered }) => (
           <Text
             style={[
               // jsStyles.headerLogo,
               {
-                backgroundColor: hovered ? 'rgba(0, 0, 0, 0.1)' : 'transparent',
-              },
-            ]}
-          >
+                backgroundColor: hovered ? 'rgba(0, 0, 0, 0.1)' : 'transparent'
+              }
+            ]}>
             <Icon
               fill={Colors.dark}
               name="logo"
               style={Platform.select({
                 default: !isLargeHorizontal && { display: 'none' },
-                web: cns(cssStyles.wideVisible),
+                web: cns(cssStyles.wideVisible)
               })}
             />
             <Icon
@@ -60,29 +58,29 @@ function HeaderLogo() {
               name="logo-small"
               style={Platform.select({
                 default: isLargeHorizontal && { display: 'none' },
-                web: cns(cssStyles.wideHidden),
+                web: cns(cssStyles.wideHidden)
               })}
             />
           </Text>
         )}
       </Pressable>
     </Link>
-  );
+  )
 }
 
 function useWidth(size: number | string) {
-  const { width } = useWindowDimensions();
+  const { width } = useWindowDimensions()
   if (typeof window === 'undefined') {
-    return true;
+    return true
   }
   if (Platform.OS === 'ios' || Platform.OS === 'android') {
-    return false;
+    return false
   }
-  return width >= size;
+  return width >= size
 }
 
 function SideBar({ visible }) {
-  const isLarge = useWidth(1265);
+  const isLarge = useWidth(1265)
 
   return (
     <View
@@ -92,17 +90,16 @@ function SideBar({ visible }) {
         ...Platform.select({
           default: [
             !visible && {
-              display: 'none',
+              display: 'none'
             },
             isLarge && {
-              minWidth: NAV_MEDIUM_WIDTH,
-            },
+              minWidth: NAV_MEDIUM_WIDTH
+            }
           ],
 
-          web: [cns(cssStyles.largeVisible, cssStyles.sideBar)],
-        }),
-      ]}
-    >
+          web: [cns(cssStyles.largeVisible, cssStyles.sideBar)]
+        })
+      ]}>
       <View
         style={[
           jsStyles.sidebarInner,
@@ -112,25 +109,23 @@ function SideBar({ visible }) {
                 ({
                   alignItems: 'flex-start',
                   minWidth: NAV_MEDIUM_WIDTH,
-                  width: NAV_MEDIUM_WIDTH,
-                } as const),
+                  width: NAV_MEDIUM_WIDTH
+                } as const)
             ],
-            web: [cns(cssStyles.sideBarInner)],
-          }),
-        ]}
-      >
+            web: [cns(cssStyles.sideBarInner)]
+          })
+        ]}>
         <View
           style={[
             jsStyles.sidebarInner2,
             Platform.select({
               default: !isLarge && {
-                alignItems: 'center',
+                alignItems: 'center'
               },
-              web: cns(cssStyles.sideBarHeader),
-            }),
+              web: cns(cssStyles.sideBarHeader)
+            })
           ]}
-          zIndex={3}
-        >
+          zIndex={3}>
           <HeaderLogo />
 
           <View style={{ flex: 1, gap: 4 }}>
@@ -150,7 +145,7 @@ function SideBar({ visible }) {
         </View>
       </View>
     </View>
-  );
+  )
 }
 
 function TabBar({ visible }) {
@@ -158,21 +153,20 @@ function TabBar({ visible }) {
     <View
       style={[
         {
-          paddingBottom: useSafeAreaInsets().bottom,
+          paddingBottom: useSafeAreaInsets().bottom
         },
         Platform.select({
           default: {
-            display: visible ? 'flex' : 'none',
+            display: visible ? 'flex' : 'none'
           },
-          web: cns(cssStyles.smallVisible),
-        }),
-      ]}
-    >
+          web: cns(cssStyles.smallVisible)
+        })
+      ]}>
       <View style={jsStyles.nav}>
         {[
           { icon: 'home', id: 'index', name: 'index' },
           { icon: 'explore', id: 'explore', name: 'explore' },
-          { icon: 'more', id: 'more', name: '/more' },
+          { icon: 'more', id: 'more', name: '/more' }
         ].map((tab, i) => (
           <TabBarItem key={i} id={tab.id} name={tab.name}>
             {({ focused, hovered, pressed }) => (
@@ -182,18 +176,18 @@ function TabBar({ visible }) {
                 name={tab.icon}
                 style={[
                   {
-                    paddingHorizontal: 8,
+                    paddingHorizontal: 8
                   },
                   Platform.select({
                     web: {
                       transform: hovered ? [{ scale: 1.1 }] : [{ scale: 1 }],
-                      transitionDuration: '100ms',
-                    },
+                      transitionDuration: '100ms'
+                    }
                   }),
                   pressed && {
                     opacity: 0.8,
-                    transform: [{ scale: 0.9 }],
-                  },
+                    transform: [{ scale: 0.9 }]
+                  }
                 ]}
               />
             )}
@@ -201,58 +195,56 @@ function TabBar({ visible }) {
         ))}
       </View>
     </View>
-  );
+  )
 }
 
 function useIsTabSelected(name: string): boolean {
-  const { navigation } = TabbedNavigator.useContext();
+  const { navigation } = TabbedNavigator.useContext()
 
-  const state = navigation.getState();
-  const current = state.routes.find((route, i) => state.index === i);
+  const state = navigation.getState()
+  const current = state.routes.find((route, i) => state.index === i)
 
-  return current?.name === name;
+  return current?.name === name
 }
 
 function TabBarItem({
   children,
   id,
   name,
-  style,
+  style
 }: {
-  children?: any;
-  name: string;
-  style?: ViewStyle;
-  id: string;
+  children?: any
+  name: string
+  style?: ViewStyle
+  id: string
 }) {
-  const focused = useIsTabSelected(id);
+  const focused = useIsTabSelected(id)
 
   if (name.startsWith('/') || name.startsWith('.')) {
     return (
       <Link asChild href={name} style={style}>
-        <Pressable accessibilityRole="button">
-          {(props) => children({ ...props, focused })}
-        </Pressable>
+        <Pressable accessibilityRole="button">{props => children({ ...props, focused })}</Pressable>
       </Link>
-    );
+    )
   }
 
   return (
     <TabbedNavigator.Link asChild name={id} style={style}>
-      <Pressable accessibilityRole="button">{(props) => children({ ...props, focused })}</Pressable>
+      <Pressable accessibilityRole="button">{props => children({ ...props, focused })}</Pressable>
     </TabbedNavigator.Link>
-  );
+  )
 }
 
 function SideBarTabItem({
   children,
   icon,
-  name,
+  name
 }: {
-  children: string;
-  icon: (props: { focused?: boolean; color: string }) => JSX.Element;
-  name: string;
+  children: string
+  icon: (props: { focused?: boolean; color: string }) => JSX.Element
+  name: string
 }) {
-  const isLarge = useWidth(1265);
+  const isLarge = useWidth(1265)
 
   return (
     <TabBarItem
@@ -261,9 +253,8 @@ function SideBarTabItem({
       name={name}
       style={{
         paddingVertical: 4,
-        width: '100%',
-      }}
-    >
+        width: '100%'
+      }}>
       {({ focused, hovered }) => (
         <View
           style={[
@@ -273,28 +264,26 @@ function SideBarTabItem({
               flexDirection: 'row',
               padding: 12,
               transitionDuration: '200ms',
-              transitionProperty: ['background-color', 'box-shadow'],
+              transitionProperty: ['background-color', 'box-shadow']
             },
             hovered && {
-              backgroundColor: 'rgba(0, 0, 0, 0.1)',
-            },
-          ]}
-        >
+              backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            }
+          ]}>
           <View
             style={[
               {
                 transitionDuration: '150ms',
                 transitionProperty: ['transform'],
-                transitionTimingFunction: 'cubic-bezier(0.17, 0.17, 0, 1)',
+                transitionTimingFunction: 'cubic-bezier(0.17, 0.17, 0, 1)'
               },
               hovered && {
-                transform: [{ scale: 1.1 }],
-              },
-            ]}
-          >
+                transform: [{ scale: 1.1 }]
+              }
+            ]}>
             {icon({
               color: '#000',
-              focused,
+              focused
             })}
           </View>
 
@@ -305,61 +294,58 @@ function SideBarTabItem({
                 fontSize: 16,
                 lineHeight: 24,
                 marginLeft: 16,
-                marginRight: 16,
+                marginRight: 16
               },
               Platform.select({
                 default: {
-                  display: isLarge ? 'flex' : 'none',
+                  display: isLarge ? 'flex' : 'none'
                 },
-                web: cns(cssStyles.sideBarTabItemText),
+                web: cns(cssStyles.sideBarTabItemText)
               }),
               focused && {
-                fontWeight: 'bold',
-              },
-            ]}
-          >
+                fontWeight: 'bold'
+              }
+            ]}>
             {children}
           </Text>
         </View>
       )}
     </TabBarItem>
-  );
+  )
 }
 
 export function ResponsiveNavigator() {
-  const isRowLayout = useWidth(768);
+  const isRowLayout = useWidth(768)
 
   return (
     <TabbedNavigator
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: 'black',
-        tabBarShowLabel: false,
-      }}
-    >
+        tabBarShowLabel: false
+      }}>
       <View
         style={[
           jsStyles.flex1,
           Platform.select({
             default: {
-              flexDirection: isRowLayout ? 'row' : 'column',
+              flexDirection: isRowLayout ? 'row' : 'column'
             },
-            web: cns(cssStyles.container),
-          }),
-        ]}
-      >
+            web: cns(cssStyles.container)
+          })
+        ]}>
         <SideBar visible={isRowLayout} />
         <AppHeader visible={!isRowLayout} />
         <TabbedNavigator.Slot />
         <TabBar visible={!isRowLayout} />
       </View>
     </TabbedNavigator>
-  );
+  )
 }
 
 function AppHeader({ visible }: { visible: boolean }) {
-  const { top } = useSafeAreaInsets();
-  const height = 60 + top;
+  const { top } = useSafeAreaInsets()
+  const height = 60 + top
   return (
     <>
       <View style={{ height }} />
@@ -367,26 +353,25 @@ function AppHeader({ visible }: { visible: boolean }) {
         style={[
           Platform.select({
             default: !visible && {
-              display: 'none',
+              display: 'none'
             },
-            web: cns(cssStyles.smallVisible),
+            web: cns(cssStyles.smallVisible)
           }),
           { height, paddingTop: top },
-          jsStyles.appHeader,
-        ]}
-      >
+          jsStyles.appHeader
+        ]}>
         <Icon fill={Colors.dark} name="logo" />
       </View>
     </>
-  );
+  )
 }
 
 const Colors = {
   dark: 'rgba(41, 41, 41, 1)',
-  lightGray: 'rgba(230, 230, 230, 1)',
-};
+  lightGray: 'rgba(230, 230, 230, 1)'
+}
 
-const NAV_MEDIUM_WIDTH = 244;
+const NAV_MEDIUM_WIDTH = 244
 
 const jsStyles = StyleSheet.create({
   appHeader: {
@@ -401,7 +386,7 @@ const jsStyles = StyleSheet.create({
     position: Platform.select({ default: 'absolute', web: 'fixed' }),
     right: 0,
     top: 0,
-    zIndex: 10,
+    zIndex: 10
   },
   flex1: { flex: 1 },
   headerLogo: {
@@ -415,7 +400,7 @@ const jsStyles = StyleSheet.create({
     marginVertical: 4,
     padding: 12,
     transitionDuration: '200ms',
-    transitionProperty: ['background-color', 'box-shadow'],
+    transitionProperty: ['background-color', 'box-shadow']
   },
   nav: {
     alignItems: 'center',
@@ -424,11 +409,11 @@ const jsStyles = StyleSheet.create({
     flexDirection: 'row',
     height: 49,
     justifyContent: 'space-around',
-    paddingHorizontal: 16,
+    paddingHorizontal: 16
   },
   sideBar: {
     minWidth: 72,
-    width: 72,
+    width: 72
   },
   sidebarInner: {
     alignItems: 'stretch',
@@ -441,12 +426,12 @@ const jsStyles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingTop: 8,
     position: Platform.select({ default: 'absolute', web: 'fixed' }),
-    width: 72,
+    width: 72
   },
   sidebarInner2: {
     alignItems: 'stretch',
     flex: 1,
     height: '100%',
-    justifyContent: 'space-between',
-  },
-});
+    justifyContent: 'space-between'
+  }
+})
