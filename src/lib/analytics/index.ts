@@ -2,9 +2,8 @@
 import * as Analytics from 'expo-firebase-analytics'
 
 import { AnalyticsEvent } from './type'
-export type AnalyticsData = {
-  screen: string
-  [key in AnalyticsEvent]: Record<string, any>
+export type AnalyticsData = { screen: string } & {
+  [key: string]: Record<string, any>
 }
 
 export const logEvent = (event: AnalyticsEvent, data?: AnalyticsData) => {

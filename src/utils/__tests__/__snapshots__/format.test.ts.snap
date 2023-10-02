@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`compareVersions should return false for lower version - 1.0.0 > 2.0.0 1`] = `false`;
+
+exports[`compareVersions should return false for lower version - 1.0.0 >= 2.0.0 1`] = `false`;
+
+exports[`compareVersions should return true for greater version - 1.0.0 < 2.0.0 1`] = `true`;
+
+exports[`compareVersions should return true for greater version - 1.0.0 <= 2.0.0 1`] = `true`;
+
+exports[`compareVersions should return true for greater version - 2.0.0 > 1.0.0 1`] = `true`;
+
+exports[`compareVersions should return true for greater version - 2.0.0 >= 1.0.0 1`] = `true`;
+
+exports[`currencyFormat should format currency 1`] = `"R$ 10,00"`;
+
+exports[`currencyFormat should format currency R$ 1.000,00 1`] = `"R$ 1.000,00"`;
+
+exports[`currencyFormat should format currency R$ 100,00 1`] = `"R$ 100,00"`;
+
+exports[`formatCep should format cep 1`] = `"12345-678"`;
+
+exports[`formatCpf should format cpf 1`] = `"123.456.789-09"`;
+
+exports[`parseStringToType should parse string to type 1 1`] = `"1"`;
+
+exports[`parseStringToType should parse string to type FALSE 1`] = `false`;
+
+exports[`parseStringToType should parse string to type TRUE 1`] = `true`;
+
+exports[`parseStringToType should parse string to type false 1`] = `false`;
+
+exports[`parseStringToType should parse string to type true 1`] = `true`;
+
+exports[`printPhone should print phone 1`] = `"(11) 99999-9999"`;
+
+exports[`should return digits only 1`] = `"123"`;

@@ -25,14 +25,16 @@ function HeaderLogo() {
       style={[
         { alignItems: 'flex-start', paddingVertical: 20 },
         Platform.select({
-          default: isSmallHorizontal &&
-            !isLargeHorizontal && {
-              height: 96,
-              marginTop: 12,
-              minHeight: 96,
-              paddingBottom: 23,
-              paddingTop: 0
-            },
+          default:
+            isSmallHorizontal && !isLargeHorizontal
+              ? {
+                  height: 96,
+                  marginTop: 12,
+                  minHeight: 96,
+                  paddingBottom: 23,
+                  paddingTop: 0
+                }
+              : {},
           web: cns(cssStyles.headerLink)
         })
       ]}>
@@ -49,7 +51,7 @@ function HeaderLogo() {
               fill={Colors.dark}
               name="logo"
               style={Platform.select({
-                default: !isLargeHorizontal && { display: 'none' },
+                default: !isLargeHorizontal ? { display: 'none' } : {},
                 web: cns(cssStyles.wideVisible)
               })}
             />
@@ -57,7 +59,7 @@ function HeaderLogo() {
               fill={Colors.dark}
               name="logo-small"
               style={Platform.select({
-                default: isLargeHorizontal && { display: 'none' },
+                default: isLargeHorizontal ? { display: 'none' } : {},
                 web: cns(cssStyles.wideHidden)
               })}
             />
@@ -76,7 +78,7 @@ function useWidth(size: number | string) {
   if (Platform.OS === 'ios' || Platform.OS === 'android') {
     return false
   }
-  return width >= size
+  return width >= Number(size)
 }
 
 function SideBar({ visible }) {
@@ -119,13 +121,14 @@ function SideBar({ visible }) {
           style={[
             jsStyles.sidebarInner2,
             Platform.select({
-              default: !isLarge && {
-                alignItems: 'center'
-              },
+              default: !isLarge
+                ? {
+                    alignItems: 'center'
+                  }
+                : {},
               web: cns(cssStyles.sideBarHeader)
             })
-          ]}
-          zIndex={3}>
+          ]}>
           <HeaderLogo />
 
           <View style={{ flex: 1, gap: 4 }}>
@@ -167,8 +170,8 @@ function TabBar({ visible }) {
           { icon: 'home', id: 'index', name: 'index' },
           { icon: 'explore', id: 'explore', name: 'explore' },
           { icon: 'more', id: 'more', name: '/more' }
-        ].map((tab, i) => (
-          <TabBarItem key={i} id={tab.id} name={tab.name}>
+        ].map(tab => (
+          <TabBarItem key={tab.id} id={tab.id} name={tab.name}>
             {({ focused, hovered, pressed }) => (
               <TabBarIcon
                 color="black"
@@ -214,9 +217,9 @@ function TabBarItem({
   style
 }: {
   children?: any
+  id: string
   name: string
   style?: ViewStyle
-  id: string
 }) {
   const focused = useIsTabSelected(id)
 
@@ -241,14 +244,13 @@ function SideBarTabItem({
   name
 }: {
   children: string
-  icon: (props: { focused?: boolean; color: string }) => JSX.Element
+  icon: (props: { color: string; focused?: boolean }) => JSX.Element
   name: string
 }) {
   const isLarge = useWidth(1265)
 
   return (
     <TabBarItem
-      accessibilityHasPopup="menu"
       id={name}
       name={name}
       style={{
