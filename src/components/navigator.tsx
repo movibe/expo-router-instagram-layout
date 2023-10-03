@@ -44,7 +44,7 @@ function HeaderLogo() {
               }
             ]}>
             <Icon
-              fill={Colors.dark}
+              fill={tailwind('text-gray-800 dark:text-gray-200').color}
               name="logo"
               style={Platform.select({
                 default: !isLargeHorizontal ? { display: 'none' } : {},
@@ -52,7 +52,7 @@ function HeaderLogo() {
               })}
             />
             <Icon
-              fill={Colors.dark}
+              fill={tailwind('text-gray-800 dark:text-gray-200').color}
               name="logo-small"
               style={Platform.select({
                 default: isLargeHorizontal ? { display: 'none' } : {},
@@ -171,9 +171,16 @@ function TabBar({ visible }: { visible: boolean }) {
             display: visible ? 'flex' : 'none'
           },
           web: cns(cssStyles.smallVisible)
-        })
+        }),
+        tailwind('bg-white dark:bg-slate-900')
       ]}>
-      <View style={styles.nav}>
+      <View
+        style={[
+          { borderTopWidth: 1 },
+          tailwind(
+            'flex-row items-center justify-around pt-2 px-4 border-t-slate-200 dark:border-t-slate-700 h-[49px]'
+          )
+        ]}>
         {[
           { icon: 'home', id: 'index', name: 'index' },
           { icon: 'explore', id: 'explore', name: 'explore' },
@@ -182,7 +189,7 @@ function TabBar({ visible }: { visible: boolean }) {
           <TabBarItem key={tab.id} id={tab.id} name={tab.name}>
             {({ focused, hovered, pressed }) => (
               <TabBarIcon
-                color="black"
+                color={tailwind('text-gray-800 dark:text-gray-200').color}
                 focused={focused}
                 name={tab.icon}
                 style={[
@@ -370,7 +377,7 @@ function AppHeader({ visible }: { visible: boolean }) {
             web: cns(cssStyles.smallVisible)
           }),
           tailwind(
-            'bg-white dark:bg-slate-800 flex-row items-center justify-between top-0 left-0 right-0 z-10 px-4  border-b-gray-200'
+            'bg-white dark:bg-slate-900 flex-row items-center justify-between top-0 left-0 right-0 z-10 px-4  border-b-gray-200 dark:border-b-slate-700'
           ),
           {
             borderBottomWidth: 1,
@@ -381,7 +388,7 @@ function AppHeader({ visible }: { visible: boolean }) {
           }
           // styles.appHeader
         ]}>
-        <Icon fill={Colors.dark} name="logo" />
+        <Icon fill={tailwind('text-gray-800 dark:text-gray-200').color} name="logo" />
       </View>
     </>
   )
@@ -395,15 +402,6 @@ const Colors = {
 const NAV_MEDIUM_WIDTH = 244
 
 const styles = StyleSheet.create({
-  nav: {
-    alignItems: 'center',
-    borderTopColor: Colors.lightGray,
-    borderTopWidth: 1,
-    flexDirection: 'row',
-    height: 49,
-    justifyContent: 'space-around',
-    paddingHorizontal: 16
-  },
   sideBar: {
     minWidth: 72,
     width: 72
