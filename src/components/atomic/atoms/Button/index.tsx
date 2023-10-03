@@ -2,9 +2,9 @@ import React from 'react'
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import { VariantProps } from 'tailwind-variants'
 
-import { buttonVariant } from './variants'
-
 import { tailwind } from '@/lib/tailwind'
+
+import { buttonVariant } from './variants'
 
 export type ButtonProps = TouchableOpacityProps & {
   children: string

@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-native'
 
+import { base } from '../base'
 import { Button, ButtonProps } from './index'
 
 const meta: Meta<ButtonProps> = {
@@ -9,7 +10,7 @@ const meta: Meta<ButtonProps> = {
     }
   },
   component: Button,
-  title: 'Button'
+  title: `${base.name}/Button`
 }
 
 export default meta

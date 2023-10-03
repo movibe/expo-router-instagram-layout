@@ -11,7 +11,9 @@ module.exports = function (api) {
             '@': './src'
           }
         }
-      ]
+      ],
+      '@babel/plugin-proposal-class-properties',
+      '@babel/plugin-proposal-private-methods'
     ],
     presets: ['babel-preset-expo']
   }

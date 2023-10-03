@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+/* eslint-disable react/display-name */
 import { Text, View } from 'react-native'
 import { useDeviceContext } from 'twrnc'
 
-import { Button } from '@/components/Button'
+import { Button } from '@/components/atomic/atoms/Button'
 import { storybookEnabled } from '@/config'
 import { translate } from '@/lib/location'
 import { tailwind, tw } from '@/lib/tailwind'
@@ -30,6 +30,7 @@ const Index = () => {
 let EntryPoint = Index
 
 if (storybookEnabled) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const StorybookUI = require('../../.storybook/native').default
   EntryPoint = () => {
     useDeviceContext(tw)

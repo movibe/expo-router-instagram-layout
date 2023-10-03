@@ -1,0 +1,33 @@
+name: Pull request development
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install Dependencies
+        run: bun i
+
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          prettier: false
+          eslint: true
+          auto_fix: true
+          commit_message: 'fix: code style issues with ${linter}'
+
+      - name: Test
+        run: |
+          bun run test:ci

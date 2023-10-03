@@ -18,11 +18,11 @@ export function Icon({
   name,
   ...props
 }: {
-  name: IconName
   fill: string
+  height?: number
+  name: IconName
   style?: any
   width?: number
-  height?: number
 }) {
   const Comp = React.useMemo(() => {
     const imp = icons(`./${name}.svg`)

@@ -25,7 +25,7 @@ export function TabbedNavigator(props: React.ComponentProps<typeof Navigator>) {
   return <Navigator {...props} router={TabRouter} />
 }
 
-export default function TabbedSlot({
+export function TabbedSlot({
   detachInactiveScreens = true,
   style
 }: {
@@ -125,7 +125,7 @@ export function TabLink({
       type: 'tabPress'
     })
 
-    if (!event.defaultPrevented) {
+    if (!event?.defaultPrevented) {
       e.preventDefault()
       navigation.dispatch({
         ...CommonActions.navigate({ merge: true, name: route.name }),
