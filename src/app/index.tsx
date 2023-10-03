@@ -2,7 +2,7 @@
 import { Text, View } from 'react-native'
 import { useDeviceContext } from 'twrnc'
 
-import { Button } from '@/components/Button'
+import { Button } from '@/components/atomic/atoms/Button'
 import { storybookEnabled } from '@/config'
 import { translate } from '@/lib/location'
 import { tailwind, tw } from '@/lib/tailwind'

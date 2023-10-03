@@ -2,11 +2,6 @@ import React from 'react'
 
 import { Icon, IconName } from './icon'
 
-export const makeIcon =
-  (name: IconName) => (props: { focused?: boolean; style?: any; color: string }) => (
-    <TabBarIcon name={name} {...props} />
-  )
-
 type TabBarIconType = {
   color: string
   focused?: boolean

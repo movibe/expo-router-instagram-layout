@@ -5,14 +5,11 @@ import { Platform, Text, useWindowDimensions, View, ViewStyle } from 'react-nati
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { Icon } from '@/components/icon'
-import { makeIcon, TabBarIcon } from '@/components/tab-bar-icon'
+import { TabBarIcon } from '@/components/tab-bar-icon'
 import { TabbedNavigator } from '@/components/tab-slot'
+import { tailwind } from '@/lib/tailwind'
 import cssStyles from '@/styles/root-layout.module.scss'
-
-const cns = (...classes: (string | false | undefined | null)[]): Record<string, any> => ({
-  $$css: true,
-  _: classes.filter(Boolean).join(' ') as unknown as string[]
-})
+import { cns } from '@/utils/styles'
 
 function HeaderLogo() {
   const isLargeHorizontal = useWidth(1264)
@@ -42,7 +39,6 @@ function HeaderLogo() {
         {({ hovered }) => (
           <Text
             style={[
-              // jsStyles.headerLogo,
               {
                 backgroundColor: hovered ? 'rgba(0, 0, 0, 0.1)' : 'transparent'
               }
@@ -87,7 +83,7 @@ function SideBar({ visible }) {
   return (
     <View
       style={[
-        jsStyles.sideBar,
+        styles.sideBar,
 
         ...Platform.select({
           default: [
@@ -104,7 +100,7 @@ function SideBar({ visible }) {
       ]}>
       <View
         style={[
-          jsStyles.sidebarInner,
+          styles.sidebarInner,
           ...Platform.select({
             default: [
               isLarge &&
@@ -119,7 +115,7 @@ function SideBar({ visible }) {
         ]}>
         <View
           style={[
-            jsStyles.sidebarInner2,
+            styles.sidebarInner2,
             Platform.select({
               default: !isLarge
                 ? {
@@ -132,16 +128,28 @@ function SideBar({ visible }) {
           <HeaderLogo />
 
           <View style={{ flex: 1, gap: 4 }}>
-            <SideBarTabItem icon={makeIcon('home')} name="index">
+            <SideBarTabItem
+              icon={({ color, focused }) => (
+                <TabBarIcon color={color} focused={focused} name="home" />
+              )}
+              name="index">
               Home
             </SideBarTabItem>
-            <SideBarTabItem icon={makeIcon('explore')} name="explore">
+            <SideBarTabItem
+              icon={({ color, focused }) => (
+                <TabBarIcon color={color} focused={focused} name="explore" />
+              )}
+              name="explore">
               Explore
             </SideBarTabItem>
             {/* Divider */}
           </View>
           <View>
-            <SideBarTabItem icon={makeIcon('more')} name="/more">
+            <SideBarTabItem
+              icon={({ color, focused }) => (
+                <TabBarIcon color={color} focused={focused} name="more" />
+              )}
+              name="/more">
               More
             </SideBarTabItem>
           </View>
@@ -151,7 +159,7 @@ function SideBar({ visible }) {
   )
 }
 
-function TabBar({ visible }) {
+function TabBar({ visible }: { visible: boolean }) {
   return (
     <View
       style={[
@@ -165,7 +173,7 @@ function TabBar({ visible }) {
           web: cns(cssStyles.smallVisible)
         })
       ]}>
-      <View style={jsStyles.nav}>
+      <View style={styles.nav}>
         {[
           { icon: 'home', id: 'index', name: 'index' },
           { icon: 'explore', id: 'explore', name: 'explore' },
@@ -328,7 +336,7 @@ export function ResponsiveNavigator() {
       }}>
       <View
         style={[
-          jsStyles.flex1,
+          tailwind('flex-1'),
           Platform.select({
             default: {
               flexDirection: isRowLayout ? 'row' : 'column'
@@ -354,13 +362,24 @@ function AppHeader({ visible }: { visible: boolean }) {
       <View
         style={[
           Platform.select({
-            default: !visible && {
-              display: 'none'
-            },
+            default: !visible
+              ? {
+                  display: 'none'
+                }
+              : {},
             web: cns(cssStyles.smallVisible)
           }),
-          { height, paddingTop: top },
-          jsStyles.appHeader
+          tailwind(
+            'bg-white dark:bg-slate-800 flex-row items-center justify-between top-0 left-0 right-0 z-10 px-4  border-b-gray-200'
+          ),
+          {
+            borderBottomWidth: 1,
+            // borderBottomWidth: 1,
+            height,
+            paddingTop: top,
+            position: Platform.select({ default: 'absolute', web: 'fixed' })
+          }
+          // styles.appHeader
         ]}>
         <Icon fill={Colors.dark} name="logo" />
       </View>
@@ -375,35 +394,7 @@ const Colors = {
 
 const NAV_MEDIUM_WIDTH = 244
 
-const jsStyles = StyleSheet.create({
-  appHeader: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderBottomColor: Colors.lightGray,
-    borderBottomWidth: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    left: 0,
-    paddingHorizontal: 16,
-    position: Platform.select({ default: 'absolute', web: 'fixed' }),
-    right: 0,
-    top: 0,
-    zIndex: 10
-  },
-  flex1: { flex: 1 },
-  headerLogo: {
-    // flex: 1,
-    alignItems: 'center',
-
-    borderRadius: 4,
-
-    display: 'flex',
-    margin: 0,
-    marginVertical: 4,
-    padding: 12,
-    transitionDuration: '200ms',
-    transitionProperty: ['background-color', 'box-shadow']
-  },
+const styles = StyleSheet.create({
   nav: {
     alignItems: 'center',
     borderTopColor: Colors.lightGray,
