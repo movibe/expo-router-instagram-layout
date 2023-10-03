@@ -18,7 +18,7 @@ export const Button = ({ children, color, onPress, size, ...props }: ButtonProps
       onPress={onPress}
       style={tailwind(buttonVariant({ color, size }))}
       {...props}>
-      <Text style={tailwind('text-lg font-bold text-gray-50')}>{children}</Text>
+      <Text style={tailwind('text-lg font-bold text-gray-50 px-4')}>{children}</Text>
     </TouchableOpacity>
   )
 }

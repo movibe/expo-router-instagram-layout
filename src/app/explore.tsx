@@ -1,8 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
+import { useDeviceContext } from 'twrnc'
+
+import { tailwind, tw } from '@/lib/tailwind'
 
 export default function Page() {
+  useDeviceContext(tw)
   return (
-    <View style={styles.container}>
+    <View style={tailwind('flex-1 items-center justify-center bg-white dark:bg-slate-800')}>
       <View style={styles.main}>
         <Text style={styles.title}>Explore</Text>
         <Text style={styles.subtitle}>Modify app/explore.tsx</Text>
